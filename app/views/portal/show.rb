@@ -553,6 +553,10 @@ module Portal
 
     private
 
+    def body_cache_key
+      'record' + document.id
+    end
+
     def collect_values(fields, doc = document)
       fields.map do |field|
         render_document_show_field_value(doc, field)

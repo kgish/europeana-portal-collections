@@ -48,7 +48,7 @@ module Europeana
       config.active_record.raise_in_transactional_callbacks = true
 
       # Use Delayed::Job as the job queue adapter
-      config.active_job.queue_adapter = :delayed_job
+      config.active_job.queue_adapter = :sidekiq
 
       # Read relative URL root from env
       config.relative_url_root = ENV['RAILS_RELATIVE_URL_ROOT'] || ''

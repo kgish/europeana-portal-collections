@@ -347,53 +347,10 @@ module MustacheHelper
         items: [
           {
             url: '#',
-            text: t('global.settings'),
+            text: t('site.settings.language.label'),
             icon: 'settings',
             submenu: {
-              items: [
-                {
-                  text: t('global.settings'),
-                  subtitle: true,
-                  url: false
-                },
-                {
-                  text: t('site.settings.language.label'),
-                  url: '/portal/settings/language',
-                  is_current: controller.controller_name == 'settings'
-                },
-                # {
-                #   text: 'My Profile',
-                #   url: 'url to profile page'
-                # },
-                # {
-                #   text: 'Advanced',
-                #   url: 'url to settings page'
-                # },
-                # {
-                #   is_divider: true
-                # },
-                # {
-                #   text: 'Admin',
-                #   subtitle: true,
-                #   url: false
-                # },
-                # {
-                #   text: 'Collection Admin',
-                #   url: 'url to admin page'
-                # },
-                # {
-                #   is_divider: true
-                # },
-                # {
-                #   text: 'Account',
-                #   subtitle: true,
-                #   url: false
-                # },
-                # {
-                #   text: 'Log Out',
-                #   url: 'url to login page'
-                # }
-              ]
+              items: language_menu_items
             }
           }
         ]
@@ -426,6 +383,17 @@ module MustacheHelper
   end
 
   private
+
+  def language_menu_items
+    localised = language_map.map do |k, v|
+      {
+        text: t("global.language-#{v}"),
+        url: url_for(locale: k),
+        is_current: params[:locale].to_s == v.to_s
+      }
+    end
+    localised.sort_by { |item| item[:text] }
+  end
 
   def page_banner(id = nil)
     banner = id.nil? ? Banner.find_by_default(true) : Banner.find(id)

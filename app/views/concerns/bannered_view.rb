@@ -17,7 +17,7 @@ module BanneredView
 
     {
       title: banner.title,
-      text: banner.body,
+      text: helpers.markdown(banner.body),
       cta_url: banner.link.present? ? banner.link.url : nil,
       cta_text: banner.link.present? ? banner.link.text : nil
     }

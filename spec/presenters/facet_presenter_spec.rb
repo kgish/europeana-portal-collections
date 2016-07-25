@@ -3,6 +3,7 @@ RSpec.describe FacetPresenter, presenter: :facet do
 
   it_behaves_like 'a single-selectable facet'
   it_behaves_like 'a labeller of facets'
+  it_behaves_like 'facets with one value are hidden'
 
   describe '.build' do
     subject { described_class.build(facet, controller, blacklight_config) }

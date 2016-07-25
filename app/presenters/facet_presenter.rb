@@ -181,7 +181,7 @@ class FacetPresenter
 
   def items_to_display(**options)
     items = facet_items.dup
-    %i{only order splice split}.each do |mod|
+    %i{only order splice minimum split}.each do |mod|
       items = send(:"apply_#{mod}_to_items", items, options) if send(:"apply_#{mod}_to_items?")
     end
     items
@@ -199,6 +199,10 @@ class FacetPresenter
     facet_config.splice.present? && facet_config.parent.present?
   end
 
+  def apply_minimum_to_items?
+    true
+  end
+
   def apply_split_to_items?
     true
   end
@@ -213,6 +217,10 @@ class FacetPresenter
 
   def apply_splice_to_items(items, **_)
     items.select { |item| facet_config.splice.call(@parent, item) } if facet_config.splice.present?
+  end
+
+  def apply_minimum_to_items(items, **options)
+    items.size < (options[:minimum] || 2) ? [] : items
   end
 
   ##

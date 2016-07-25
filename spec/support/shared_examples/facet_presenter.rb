@@ -187,3 +187,25 @@ shared_examples 'a labeller of facets' do
 #     end
   end
 end
+
+shared_examples 'facets with one value are shown' do
+  describe '#display' do
+    subject { presenter.display }
+    let(:items) { facet_items(1) }
+
+    it 'shows the item' do
+      expect(subject[:items]).not_to be_nil
+    end
+  end
+end
+
+shared_examples 'facets with one value are hidden' do
+  describe '#display' do
+    subject { presenter.display }
+    let(:items) { facet_items(1) }
+
+    it 'shows no items' do
+      expect(subject[:items]).to be_nil
+    end
+  end
+end

@@ -5,6 +5,7 @@ RSpec.describe Facet::ColourPresenter, presenter: :facet do
   it_behaves_like 'a facet presenter'
   it_behaves_like 'a single-selectable facet'
   it_behaves_like 'a field-showing/hiding presenter'
+  it_behaves_like 'facets with one value are hidden'
 
   describe '#display' do
     subject { presenter.display }

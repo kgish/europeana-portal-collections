@@ -61,6 +61,7 @@ end
 
 group :development do
   gem 'foreman'
+  gem 'i18n-tasks', '~> 0.9.5'
   gem 'spring', '~> 1.6'
 end
 

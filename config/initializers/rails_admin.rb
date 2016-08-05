@@ -18,7 +18,7 @@ RailsAdmin.config do |config|
 
   config.included_models = %w(
     Banner BrowseEntry Collection HeroImage Link Link::Promotion Link::Credit
-    Link::SocialMedia MediaObject Page Page::Error Page::Landing User
+    Link::SocialMedia Link::StraplineEntryPoint MediaObject Page Page::Error Page::Landing User
   )
 
   config.actions do
@@ -221,6 +221,15 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model 'Link::StraplineEntryPoint' do
+    object_label_method :text
+    visible false
+    edit do
+      field :url, :string
+      field :text
+    end
+  end
+
   config.model 'MediaObject' do
     visible false
     field :file do
@@ -323,6 +332,7 @@ RailsAdmin.config do |config|
       field :hero_image_file, :paperclip
       field :strapline
       field :state
+      field :strapline_entry_points
       field :credits
       field :social_media
       field :promotions
@@ -337,6 +347,7 @@ RailsAdmin.config do |config|
       end
       field :hero_image
       field :strapline
+      field :strapline_entry_points
       field :credits
       field :social_media
       field :promotions

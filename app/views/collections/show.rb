@@ -86,10 +86,6 @@ module Collections
 
     private
 
-    def strapline
-      @landing_page.strapline.present? ? @landing_page.strapline(total_item_count: number_with_delimiter(@total_item_count)) : nil
-    end
-
     def body_cache_key
       @landing_page.cache_key
     end

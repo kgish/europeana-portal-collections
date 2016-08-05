@@ -8,6 +8,8 @@ class HomeController < ApplicationController
     @collection = find_collection
     @landing_page = find_landing_page
     @europeana_item_count = cached_record_count # populated by {Cache::RecordCountsJob}
+    @total_item_count = @europeana_item_count
+
 
     respond_to do |format|
       format.html

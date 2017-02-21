@@ -55,7 +55,7 @@ class PortalController < ApplicationController
       @mlt_response = nil
       @similar = []
     end
-    @annotations = document_annotations(@document)
+    @annotations = document_annotations(@document.id)
 
     @debug = JSON.pretty_generate(@document.as_json.merge(hierarchy: @hierarchy.as_json)) if params[:debug] == 'json'
 

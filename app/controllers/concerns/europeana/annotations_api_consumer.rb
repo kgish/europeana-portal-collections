@@ -5,8 +5,8 @@ module Europeana
   module AnnotationsApiConsumer
     extend ActiveSupport::Concern
 
-    def document_annotations(document)
-      search_response = annotations_search_for_document(document)
+    def document_annotations(document_id)
+      search_response = annotations_search_for_document(document_id)
       return nil unless search_response.key?('items')
 
       annotations_from_search_response(search_response).
@@ -20,8 +20,8 @@ module Europeana
       nil
     end
 
-    def annotations_search_for_document(document)
-      Europeana::API.annotation.search(annotations_api_search_params(document))
+    def annotations_search_for_document(document_id)
+      Europeana::API.annotation.search(annotations_api_search_params(document_id))
     end
 
     def annotations_from_search_response(search_response)
@@ -55,11 +55,11 @@ module Europeana
       end
     end
 
-    def annotations_api_search_params(document)
+    def annotations_api_search_params(document_id)
       {
         qf: [
           %(generator_name:#{ENV['EUROPEANA_ANNOTATIONS_API_GENERATOR_NAME'] || 'Europeana.eu*'}),
-          %(target_id:"http://data.europeana.eu/item#{document.id}")
+          %(target_id:"http://data.europeana.eu/item#{document_id}")
         ],
         query: '*:*',
         pageSize: 100
